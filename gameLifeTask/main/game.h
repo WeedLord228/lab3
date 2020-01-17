@@ -40,8 +40,8 @@ void fillBoard(){
     board [1][2] = true;
 }
 
-bool bufferBoard[8][8];
-bool board[8][8];
+bool bufferBoard[16][16];
+bool board[16][16];
 
 private:
 
