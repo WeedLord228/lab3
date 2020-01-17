@@ -1,6 +1,15 @@
 #include "LedControl.h"
 #include "game.h"
 
+//#include <TFT.h> 
+//#include <SPI.h>
+//
+//#define cs 10
+//#define dc 9
+//#define rst 8
+
+//TFT TFTscreen = TFT(cs, dc, rst);
+
 int displayCount = 1;
 LedControl display = LedControl(26,22,24,displayCount);
 Game game = Game(8);
@@ -12,6 +21,10 @@ uint64_t lastDisplayUpdate;
 
 void setup ()
 {
+//  TFTscreen.begin();
+//  TFTscreen.background(100, 0, 0);
+//  TFTscreen.setTextSize(2);
+//  
   for (int i =0;i < displayCount; i++)
   {
     display.shutdown(i, false);
@@ -22,6 +35,16 @@ void setup ()
 
 void loop()
 {
+//  int redRandom = random(0, 255);
+//  int greenRandom = random (0, 255);
+//  int blueRandom = random (0, 255);
+//
+//  TFTscreen.stroke(redRandom, greenRandom, blueRandom);
+//
+//  TFTscreen.text("Hello, World!", 6, 57);
+//
+//  delay(200);
+//  
   writeBoard();
   updateGame();
 }

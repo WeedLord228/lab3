@@ -48,27 +48,22 @@ private:
 bool checkTile(int i, int j)
 {
   int neighbours = 0;
-  bool result = false;
    for (int x = i -1; x < i+2; x++)
-    for (int y = j; y < j+2; y++)
+    for (int y = j -  1; y < j+2; y++)
     {
-      if (x < 0) x = boardSize - 1;
-      if (y < 0) y = boardSize - 1;
-
-      if(board[x % boardSize][y % boardSize])
+      if (x ==i && y ==j) continue;
+      
+      if(board[(x+boardSize) % boardSize][(y+boardSize) % boardSize])
         neighbours++;
     }
-
-    neighbours--;
     
     if(board[i][j])
     {
       return ((neighbours > 1) && (neighbours < 4));
     }
-    else {
+    else
       return (neighbours == 3);
-    }
-      return false;
+      
 }
 
 private :
