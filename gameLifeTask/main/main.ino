@@ -11,6 +11,8 @@
 
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
+
+GameState gs = Preparing;
 int displayCount = 1;
 LedControl display = LedControl(26,22,24,displayCount);
 Game game = Game(16);
@@ -22,6 +24,8 @@ uint64_t lastDisplayUpdate;
 
 void setup ()
 {
+  Serial.begin(115200);
+  
   // Use this initializer if using a 1.8" TFT screen:
   tft.initR(INITR_BLACKTAB);      // Init ST7735S chip, black tab
   tft.fillScreen(ST77XX_BLACK);
@@ -36,8 +40,20 @@ void setup ()
 
 void loop()
 {
+  char command = Serial.read();
+  if(tolower(command) == 's')
+  {
+    gs = Playing;
+  }
+  if(tolower(command) == 'p')
+  if (gs == Preparing){
+  changeBoard(Serial.parseInt(),Serial.parseInt());
+  }
+  
   drawBoard();
-  updateGame();
+  if (gs == Playing){
+    updateGame();
+  }
 }
 
 void drawBoard()
@@ -56,6 +72,12 @@ void drawBoard()
     }
     lastDisplayUpdate = millis();    
    }
+}
+
+void changeBoard (int i, int j)
+{
+  bool c = game.board[i][j];
+  game.board[i][j] = !c;
 }
 
 void updateGame()
