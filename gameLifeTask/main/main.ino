@@ -29,13 +29,6 @@ void setup ()
   // Use this initializer if using a 1.8" TFT screen:
   tft.initR(INITR_BLACKTAB);      // Init ST7735S chip, black tab
   tft.fillScreen(ST77XX_BLACK);
-  
-  for (int i =0;i < displayCount; i++)
-  {
-    display.shutdown(i, false);
-    display.setIntensity(i, 4);
-    display.clearDisplay(i);
-  }
 }
 
 void loop()
